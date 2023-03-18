@@ -1,0 +1,42 @@
+enable 
+cisco 
+config t
+class
+Router 1 
+int g0/0 
+ip address 172.16.20.1 255.255.255.128 
+no shutdown 
+
+int g0/1 
+ip address 172.16.20.129 255.255.255.128
+no shutdown 
+
+int s0/0/0 
+ip address 209.165.200.225 255.255.255.252
+no shutdown 
+do show ip int brief 
+
+
+router 2 ipv6 
+
+ipv6 unicast-routing  
+
+int g0/0 
+ipv6 address 2001:db8:c0de:12::1/64
+ipv6 address fe80::2 link-local 
+no shutdown 
+
+int g0/1 
+ipv6 address 2001:db8:c0de:13::1/64
+ipv6 address fe80::2 link-local 
+no shutdown
+
+int s0/0/1
+ipv6 address 2001:db8:c0de:11::1/64
+ipv6 address fe80::2 link-local 
+no shutdown 
+do show ipv6 int breif 
+exit
+exit
+copy running-config startup-config 
+
